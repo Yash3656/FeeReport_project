@@ -53,9 +53,23 @@ public class StudentDaoImpl implements StudentDao{
 	}
 
 	@Override
-	public Student showstudent()
+	public  String showstudent() throws IOException
 	{
-			try {
+		File sf = new File("C:/Learning_java/FileIO/Student_data.txt");
+        FileReader fr = new FileReader(sf);
+        FileWriter fw = new FileWriter(sf,true);
+
+        // FileReader will open that file 
+        BufferedReader br=new BufferedReader(fr);
+        BufferedWriter bw=new BufferedWriter(fw); 
+        String str = "";
+        while((str=br.readLine())!=null)  
+        {  
+        	
+        		System.out.print(str +"/t");
+        }
+        return "Students Data Shown";
+		/*	try {
 				File file2 = new File("C:/Learning_java/FileIO/Student_data.txt");
 				Desktop desk = Desktop.getDesktop();
 				if(file2.exists())
@@ -65,13 +79,12 @@ public class StudentDaoImpl implements StudentDao{
 			{
 			e.printStackTrace();
 		}
-			return null;
+		*/
 	}
 
 	@Override
 	public String updateStudent(Student S) {
 		// TODO Auto-generated method stub
-		load();
 		addstudent(S);
 		return ("The Student Data is Updated");
 		
@@ -82,7 +95,7 @@ public class StudentDaoImpl implements StudentDao{
 	public void addstudent(Student S)
 	{
 		//Student S = new Student();
-		Scanner sc1 = new Scanner(System.in);
+		//Scanner sc1 = new Scanner(System.in);
 		
 		try {
 			
@@ -105,25 +118,25 @@ public class StudentDaoImpl implements StudentDao{
 	}
 	
 	@Override
-	public Student load()
+	public String load(String s)
 	{
+		 String str2="";
 		try {
 			  
            /// Creating a FileReader object and
             File sf = new File("C:/Learning_java/FileIO/Student_data.txt");
-            File temp = new File("C:/Learning_java/FileIO/tempfile.txt");
+       //     File temp = new File("C:/Learning_java/FileIO/tempfile.txt");
             FileReader fr = new FileReader(sf);
-            FileWriter fw = new FileWriter(sf,true);
+     //       FileWriter fw = new FileWriter(sf,true);
   
             // FileReader will open that file 
-            BufferedReader br=new BufferedReader(fr);
-            BufferedWriter bw=new BufferedWriter(fw); 
-            Scanner sc=new Scanner(System.in);
-            System.out.println("Enter the Roll no u want to load :--");
-            String s=sc.nextLine(); 
+            @SuppressWarnings("resource")
+			BufferedReader br=new BufferedReader(fr);
+           // BufferedWriter bw=new BufferedWriter(fw); 
+          //  Scanner sc=new Scanner(System.in);
             String str = "";
-            String str2="";
-            String str3="";
+           
+            //String str3="";
             while((str=br.readLine())!=null)  
             {  
             	if(str.indexOf(s)!=-1)
@@ -140,7 +153,7 @@ public class StudentDaoImpl implements StudentDao{
             		str2=str2.concat(str);
             	}
             }
-            while((str3=br.readLine())!=null)  
+         /*   while((str3=br.readLine())!=null)  
             {
             	String tl = str3.trim();
             	if(tl.equals(str2))
@@ -150,11 +163,14 @@ public class StudentDaoImpl implements StudentDao{
             bw.close();
             br.close();
             boolean successful = temp.renameTo(sf);
+		}*/
 		}
             catch(Exception e) {
-            	
+            	System.out.println("Record not found");
             }
-		return null;
+            	
+            
+		return str2;
 	}
 }
 

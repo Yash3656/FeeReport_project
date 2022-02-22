@@ -1,6 +1,7 @@
 package mini_project_final;
 import Dao.*;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class accountant_section {
@@ -53,16 +54,25 @@ public class accountant_section {
 				break;
 				
 			case 2:
-				S1.showstudent();
+				try {
+					String s =S1.showstudent();
+					System.out.println(s);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			
 			case 3:
+				Scanner sc = new Scanner(System.in);
+				String rn =sc.nextLine();
+				String b =S1.load(rn);
 				String a =S1.updateStudent(S);
 				System.out.println(a);
 				break;
 				
 			case 4:
-				S1.due();
+				Student S2 =S1.due();
 				break;
 				
 			case 5:
