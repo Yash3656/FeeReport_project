@@ -14,102 +14,124 @@ public class StudentDaoImpl implements StudentDao{
 	      students = new ArrayList<Student>();
 	      Student S1 = new Student();
 	   }
-
-	@Override
-	public List<Student> getallStudents() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Student getStudent(String rollno) {
-		// TODO Auto-generated method stub
-		Student S2 = new Student();
-		return S2;
-	}
-	public Student due()
+    @Override
+	public ArrayList<String>  due(Student S,File F2)
 	{
-		Student S = new Student();
-		File sf = new File("C:/Learning_java/FileIO/Student_data.txt");
-		
+    	ArrayList <String> St_due = new ArrayList<String>();
 		try {
-			FileReader fr = new FileReader(sf);
-			FileWriter fw = new FileWriter(sf,true);
+			FileReader fr = new FileReader(F2);
+			FileWriter fw = new FileWriter(F2,true);
 			BufferedReader br=new BufferedReader(fr);
 	        BufferedWriter bw=new BufferedWriter(fw);
 	        String s="";
 	        while((s=br.readLine())!=null)        
-	    		if(S.getDue_fees()!=null)
+	        {	if(s.indexOf("Due")!=-1)
 	    		{
-	    			System.out.println(s);
+	    			St_due.add(s);
 	    		}
-			
+	        }
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return S;
+		return St_due;
 		
 		
 	}
 
 	@Override
-	public  String showstudent() throws IOException
+	public  ArrayList<String> showstudent(File F2) 
 	{
-		File sf = new File("C:/Learning_java/FileIO/Student_data.txt");
-        FileReader fr = new FileReader(sf);
-        FileWriter fw = new FileWriter(sf,true);
-
-        // FileReader will open that file 
-        BufferedReader br=new BufferedReader(fr);
-        BufferedWriter bw=new BufferedWriter(fw); 
+		ArrayList <String> St_data = new ArrayList<String>();
+		try {
+        FileReader fr = new FileReader(F2); 
+        @SuppressWarnings("resource")
+		BufferedReader br=new BufferedReader(fr); 
         String str = "";
         while((str=br.readLine())!=null)  
         {  
-        	
-        		System.out.print(str +"/t");
+        		St_data.add(str);
         }
-        return "Students Data Shown";
-		/*	try {
-				File file2 = new File("C:/Learning_java/FileIO/Student_data.txt");
-				Desktop desk = Desktop.getDesktop();
-				if(file2.exists())
-				desk.open(file2);	
-			}
-			catch(IOException e)
-			{
+		}
+		catch(IOException e)
+		{
 			e.printStackTrace();
 		}
-		*/
+        return (St_data);
+		
 	}
 
 	@Override
-	public String updateStudent(Student S) {
-		// TODO Auto-generated method stub
-		addstudent(S);
+	public String updateStudent(Student S,String b,File F2) {
+		try{
+		FileReader fr = new FileReader(F2);
+		FileWriter Fw = new FileWriter(F2,true);
+		BufferedReader br  = new BufferedReader(fr);
+		BufferedWriter bw=new BufferedWriter(Fw);
+		String s ="";
+		Scanner sc1 =new Scanner(System.in);
+		while((s=br.readLine())!= null)
+		{
+			if(s.indexOf(b)!=-1)
+			{
+				String concat1="";
+				System.out.println("Enter the Name of the Student:--");
+				S.setName(sc1.nextLine());
+				concat1 = concat1.concat(S.getName());
+				System.out.println("Enter the  Course Enrolled of the Student:-- ");
+				S.setCourse(sc1.nextLine());
+				concat1 = concat1.concat(S.getCourse());
+				System.out.println("Enter the Email-Id of the Student:-- ");
+				S.setEmail_Id(sc1.nextLine());
+				concat1 = concat1.concat(S.getEmail_Id());
+				System.out.println("Enter the Fees of the Student:-- ");
+				S.setFees(sc1.nextLine());
+				concat1 = concat1.concat(S.getFees());
+				System.out.println("Enter the Paid Fees of the Student:-- ");
+				S.setPaid_fees(sc1.nextLine());
+				concat1 = concat1.concat(S.getPaid_fees());
+				System.out.println("Enter the Due Fees of the Student:-- ");
+				S.setDue_fees(sc1.nextLine());
+				concat1 = concat1.concat(S.getDue_fees());
+				System.out.println("Enter the Address of the Student:-- ");
+				S.setAddress(sc1.nextLine());
+				concat1 = concat1.concat(S.getAddress());
+				System.out.println("Enter the City of the Student:-- ");
+				S.setCity(sc1.nextLine());
+				concat1 = concat1.concat(S.getCity());
+				System.out.println("Enter the State of the Student:-- ");
+				S.setState(sc1.nextLine());
+				concat1 = concat1.concat(S.getState());
+				System.out.println("Enter the Country of the Student:-- ");
+				S.setCountry(sc1.nextLine());
+				concat1 = concat1.concat(S.getCountry());
+				System.out.println("Enter the Contact-No of the Accountant:-- ");
+				S.setContact_No(sc1.nextLine());
+				concat1 = concat1.concat(S.getContact_No());
+				s.replaceAll(b,concat1);
+			}
+		}
+		}
+		catch(IOException e) {
+			
+		}
 		return ("The Student Data is Updated");
 		
 	}
 	
 	
 	@Override
-	public void addstudent(Student S)
+	public void addstudent(Student S,File F2)
 	{
-		//Student S = new Student();
-		//Scanner sc1 = new Scanner(System.in);
-		
 		try {
-			
-			File sf=new File("C:/Learning_java/FileIO/Student_data.txt");
-			FileWriter Fw = new FileWriter(sf,true);
-			BufferedWriter bw=new BufferedWriter(Fw);
+			FileWriter Fw = new FileWriter(F2,true);
+			BufferedWriter Bw=new BufferedWriter(Fw);
 		
 		String f = (S.getRollNo()+"\t"+S.getName()+"\t"+S.getCourse()+"\t"+S.getEmail_Id()
 					+"\t"+S.getFees()+"\t"+S.getPaid_fees()+"\t"+S.getDue_fees()+"\t"+S.getAddress()
 					+"\t"+S.getCity()+"\t"+S.getState()+"\t"+S.getCountry()+"\t"+S.getCountry()+"\t"+S.getContact_No()+"\n");
 	
-				
-			bw.write(f);
-			bw.close();
+			Bw.write(f);
+			Bw.close();
 		}
 		catch(IOException e)
 		{
@@ -118,59 +140,27 @@ public class StudentDaoImpl implements StudentDao{
 	}
 	
 	@Override
-	public String load(String s)
+	public String load(String s,File F2)
 	{
-		 String str2="";
+		String str2="";
 		try {
-			  
-           /// Creating a FileReader object and
-            File sf = new File("C:/Learning_java/FileIO/Student_data.txt");
-       //     File temp = new File("C:/Learning_java/FileIO/tempfile.txt");
-            FileReader fr = new FileReader(sf);
-     //       FileWriter fw = new FileWriter(sf,true);
-  
-            // FileReader will open that file 
+            FileReader fr = new FileReader(F2);
             @SuppressWarnings("resource")
 			BufferedReader br=new BufferedReader(fr);
-           // BufferedWriter bw=new BufferedWriter(fw); 
-          //  Scanner sc=new Scanner(System.in);
             String str = "";
-           
-            //String str3="";
             while((str=br.readLine())!=null)  
             {  
             	if(str.indexOf(s)!=-1)
             	{
-            		System.out.print(str);
+            		str2=str;
             	}
             }
-            System.out.println();
-    	
-            while((str=br.readLine())!=null)  
-            {  
-            	if(str.indexOf(s)!=-1)
-            	{
-            		str2=str2.concat(str);
-            	}
-            }
-         /*   while((str3=br.readLine())!=null)  
-            {
-            	String tl = str3.trim();
-            	if(tl.equals(str2))
-            		continue;
-            	bw.write(str3+System.getProperty("line.separator"));
-            }
-            bw.close();
-            br.close();
-            boolean successful = temp.renameTo(sf);
-		}*/
 		}
             catch(Exception e) {
             	System.out.println("Record not found");
             }
             	
-            
-		return str2;
+      return str2;
 	}
 }
 

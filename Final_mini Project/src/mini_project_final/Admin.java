@@ -1,14 +1,14 @@
 package mini_project_final;
 
-public class admin {
+public class Admin {
 	String admin_name = "YashAgrawal";
 	String admin_pass = "Yash@123";
 	
 	
 	
-	boolean login(String name , String pass)
+	boolean login(String adm_name , String adm_pass)
 	{
-		if(name.equals(admin_name) && pass.equals(admin_pass))
+		if(adm_name.equals(admin_name) && adm_pass.equals(admin_pass))
 		{
 			System.out.println("Login Successful!\n");
 			return true;
