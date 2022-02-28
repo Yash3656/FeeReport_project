@@ -12,7 +12,7 @@ public class Fee_report
 {
 	 static Scanner sc = new Scanner(System.in);
 	int a,z;
-	public void original(Admin Ad,Accountant A,AccountantDao A1,AccountantDao_JDBC A2,Student S,StudentDao S1,StudentDao_JDBC S2,File F1,File F2, Connection conn) throws SQLException
+	public void original(Admin Adm,Accountant Accnt,AccountantDaoF AccntF,AccountantDaoJdbc AccntD,Student Std,StudentDaoF StdF,StudentDaoJdbc StdD,File F1,File F2, Connection conn) throws SQLException
 	{
 		do
 		{ 
@@ -26,7 +26,7 @@ public class Fee_report
 				String adm_name = sc.next();
 				System.out.println("Enter the Password :--");
 				String adm_pass = sc.next();
-				boolean x1= Ad.login(adm_name, adm_pass);
+				boolean x1= Adm.login(adm_name, adm_pass);
 				if(x1)
 				{
 					System.out.println("\nLogin Successful!\n");
@@ -42,18 +42,18 @@ public class Fee_report
 						
 						System.out.println("Enter the Name of the Accountant:-- ");
 						sc.nextLine();
-						A.setAcc_name(sc.nextLine());
+						Accnt.setAcc_name(sc.nextLine());
 						System.out.println("Enter the Password of the Accountant:-- ");
-						A.setAcc_password(sc.nextLine());
+						Accnt.setAcc_password(sc.nextLine());
 						System.out.println("Enter the Email-Id of the Accountant:-- ");
-						A.setAcc_email(sc.nextLine());
+						Accnt.setAcc_email(sc.nextLine());
 						System.out.println("Enter the Contact-No of the Accountant:-- ");
-						A.setAcc_contact(sc.nextLine());
-						A1.addAccountant(A, F1);
+						Accnt.setAcc_contact(sc.nextLine());
+						AccntF.addAccountant(Accnt, F1);
 						break;
 						
 					case 2:
-						ArrayList <String> l  = A1.showAccountant(F1);
+						ArrayList <String> l  = AccntF.showAccountant(F1);
 						System.out.println(l);
 						
 						break;
@@ -62,26 +62,26 @@ public class Fee_report
 						
 						System.out.println("Enter the Name of the Accountant:-- ");
 						sc.nextLine();
-						A.setAcc_name(sc.nextLine());
+						Accnt.setAcc_name(sc.nextLine());
 						System.out.println("Enter the Password of the Accountant:-- ");
-						A.setAcc_password(sc.nextLine());
+						Accnt.setAcc_password(sc.nextLine());
 						System.out.println("Enter the Email-Id of the Accountant:-- ");
-						A.setAcc_email(sc.nextLine());
+						Accnt.setAcc_email(sc.nextLine());
 						System.out.println("Enter the Contact-No of the Accountant:-- ");
-						A.setAcc_contact(sc.nextLine());
+						Accnt.setAcc_contact(sc.nextLine());
 						System.out.println("Enter the Id of the Accountant:-- ");
-						A.setAcc_id(sc.nextLine());
-						String z=A2.addAccountant(A, conn);
+						Accnt.setAcc_id(sc.nextLine());
+						String z=AccntD.addAccountant(Accnt, conn);
 						System.out.println(z);
 						break;
 						
 					case 4:
-						ArrayList <String> l2  = A2.showAccountant(conn);
+						ArrayList <String> l2  = AccntD.showAccountant(conn);
 						System.out.println(l2);
 						
 						break;	
 					case 5:
-						original(Ad,A,A1,A2,S,S1,S2,F1,F2,conn);
+						original(Adm,Accnt,AccntF,AccntD,Std,StdF,StdD,F1,F2,conn);
 						break;
 						
 					case 6:
@@ -100,7 +100,7 @@ public class Fee_report
 				else
 				{
 					System.out.println("\nInvalid name or password\n");
-					original(Ad,A,A1,A2,S,S1,S2,F1,F2,conn);
+					original(Adm,Accnt,AccntF,AccntD,Std,StdF,StdD,F1,F2,conn);
 				}
 				break;
 				
@@ -109,7 +109,7 @@ public class Fee_report
 				String acc_name = sc.next();
 				System.out.println("Enter the Accountant Password :--");
 				String acc_pass = sc.next();
-				boolean y= A1.login_1(acc_name,acc_pass, F1);
+				boolean y= AccntF.login(acc_name,acc_pass, F1);
 				if(y)
 				{
 					System.out.println("\n Accountant Login Successful!\n");
@@ -126,101 +126,102 @@ public class Fee_report
 					case 1:
 						System.out.println("Enter the Roll_No of the Student :-- ");
 						sc.nextLine();
-						S.setRollNo(sc.nextLine());
+						Std.setRollNo(sc.nextLine());
 						System.out.println("Enter the Name of the Student:--");
-						S.setName(sc.nextLine());
+						Std.setName(sc.nextLine());
 						System.out.println("Enter the Fees of the Student:-- ");
-						S.setFees(sc.nextLine());
+						Std.setFees(sc.nextLine());
 						System.out.println("Enter the Paid Fees of the Student:-- ");
-						S.setPaid_fees(sc.nextLine());
+						Std.setPaid_fees(sc.nextLine());
 						System.out.println("Enter the Due Fees of the Student should start with Due:-- ");
-						S.setDue_fees(sc.nextLine());
+						Std.setDue_fees(sc.nextLine());
 						System.out.println("Enter the  Course Enrolled of the Student:-- ");
-						S.setCourse(sc.nextLine());
+						Std.setCourse(sc.nextLine());
 						System.out.println("Enter the Email-Id of the Student:-- ");
-						S.setEmail_Id(sc.nextLine());
+						Std.setEmail_Id(sc.nextLine());
 						System.out.println("Enter the Address of the Student:-- ");
-						S.setAddress(sc.nextLine());
+						Std.setAddress(sc.nextLine());
 						System.out.println("Enter the City of the Student:-- ");
-						S.setCity(sc.nextLine());
+						Std.setCity(sc.nextLine());
 						System.out.println("Enter the State of the Student:-- ");
-						S.setState(sc.nextLine());
+						Std.setState(sc.nextLine());
 						System.out.println("Enter the Country of the Student:-- ");
-						S.setCountry(sc.nextLine());
+						Std.setCountry(sc.nextLine());
 						System.out.println("Enter the Contact-No of the Accountant:-- ");
-						S.setContact_No(sc.nextLine());
-						S1.addstudent(S,F2);
+						Std.setContact_No(sc.nextLine());
+						String addF =StdF.addStudent(Std,F2);
+						System.out.println(addF);
 						break;
 						
 					case 2:
-							ArrayList <String> l1  =S1.showstudent(F2);
+							ArrayList <String> l1  =StdF.showStudent(F2);
 							System.out.println(l1);
 						break;
 					
 					case 3:
 						System.out.println("Enter the roll number u want to load info for:--");
 						String rn =sc.nextLine();
-						String b =S1.load(rn,F2);
+						String b =StdF.load(rn,F2);
 						System.out.println(b);
-						String a =S1.updateStudent(S,b,F2);
+						String a =StdF.updateStudent(Std,b,F2);
 						System.out.println(a);
 						break;
 						
 					case 4:
-						ArrayList <String> l2  =S1.due(S,F2);
+						ArrayList <String> l2  =StdF.due(Std,F2);
 						System.out.println(l2);
 						break;
 						
 					case 5:
 						System.out.println("Enter the Roll_No of the Student :-- ");
-						S.setRollNo(sc.next());
+						Std.setRollNo(sc.next());
 						System.out.println("Enter the Name of the Student:--");
-						S.setName(sc.next());
+						Std.setName(sc.next());
 						System.out.println("Enter the  Course Enrolled of the Student:-- ");
-						S.setCourse(sc.next());
+						Std.setCourse(sc.next());
 						System.out.println("Enter the Email-Id of the Student:-- ");
-						S.setEmail_Id(sc.next());
+						Std.setEmail_Id(sc.next());
 						System.out.println("Enter the Fees of the Student:-- ");
-						S.setFees(sc.next());
+						Std.setFees(sc.next());
 						System.out.println("Enter the Paid Fees of the Student:-- ");
-						S.setPaid_fees(sc.next());
+						Std.setPaid_fees(sc.next());
 						System.out.println("Enter the Due Fees of the Student:-- ");
-						S.setDue_fees(sc.next());
+						Std.setDue_fees(sc.next());
 						System.out.println("Enter the Address of the Student:-- ");
-						S.setAddress(sc.next());
+						Std.setAddress(sc.next());
 						System.out.println("Enter the City of the Student:-- ");
-						S.setCity(sc.next());
+						Std.setCity(sc.next());
 						System.out.println("Enter the State of the Student:-- ");
-						S.setState(sc.next());
+						Std.setState(sc.next());
 						System.out.println("Enter the Country of the Student:-- ");
-						S.setCountry(sc.next());
+						Std.setCountry(sc.next());
 						System.out.println("Enter the Contact-No of the Accountant:-- ");
-						S.setContact_No(sc.next());
-						String res =S2.addstudent(S,conn);
+						Std.setContact_No(sc.next());
+						String res =StdD.addStudent(Std,conn);
 						System.out.println(res);
 						break;
 						
 					case 6:
-							ArrayList <String> l4  =S2.showstudent(conn);
+							ArrayList <String> l4  =StdD.showStudent(conn);
 							System.out.println(l4);
 						break;
 					
 					case 7:
 						System.out.println("Enter the roll number u want to load info for:--");
 						int rn1 =sc.nextInt();
-						String b1 =S2.load(rn1,conn);
+						String b1 =StdD.load(rn1,conn);
 						System.out.println(b1);
-						String a1 =S2.updateStudent(S,rn1,conn);
+						String a1 =StdD.updateStudent(Std,rn1,conn);
 						System.out.println(a1);
 						break;
 						
 					case 8:
-						ArrayList <String> l3  =S2.due(conn);
+						ArrayList <String> l3  =StdD.due(conn);
 						System.out.println(l3);
 						break;
 						
 					case 9:
-						original(Ad,A,A1,A2,S,S1,S2,F1,F2,conn);
+						original(Adm,Accnt,AccntF,AccntD,Std,StdF,StdD,F1,F2,conn);
 						break;
 						
 					case 10:
@@ -240,7 +241,7 @@ public class Fee_report
 				else
 				{
 					System.out.println("\nInvalid name or password\n");
-					original(Ad,A,A1,A2,S,S1,S2,F1,F2,conn);
+					original(Adm,Accnt,AccntF,AccntD,Std,StdF,StdD,F1,F2,conn);
 				}
 				break;
 				
@@ -262,15 +263,15 @@ public class Fee_report
 		File F2 = new File("C:/Learning_java/FileIO/Student_data.txt");
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(url,user,password);
-		Fee_report F = new Fee_report();
-		Admin Ad = new Admin();
-		Accountant A = new Accountant();
-		AccountantDao A1 =  new AccountantDaoImpl();
-		AccountantDao_JDBC A2 =  new AccountantDaoImpl_JDBC();
-		Student S = new Student();
-		StudentDao S1 = new StudentDaoImpl();
-		StudentDao_JDBC S2 = new StudentDaoImpl_JDBC();
-		F.original(Ad,A,A1,A2,S,S1,S2,F1,F2,conn);
+		Fee_report Fee = new Fee_report();
+		Admin Adm = new Admin();
+		Accountant Accnt = new Accountant();
+		AccountantDaoF AccntF =  new AccountantDaoImpl();
+		AccountantDaoJdbc AccntD =  new AccountantDaoImplJdbc();
+		Student Std = new Student();
+		StudentDaoF StdF = new StudentDaoImplF();
+		StudentDaoJdbc StdD = new StudentDaoImplJdbc();
+		Fee.original(Adm,Accnt,AccntF,AccntD,Std,StdF,StdD,F1,F2,conn);
 	}
 	
 }

@@ -4,10 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StudentDaoImpl implements StudentDao{
+public class StudentDaoImplF implements StudentDaoF{
 
 	@Override
-	public void addstudent(Student S,File F2)
+	public String addStudent(Student S,File F2)
 	{
 		try {
 			FileWriter Fw = new FileWriter(F2,true);
@@ -24,10 +24,11 @@ public class StudentDaoImpl implements StudentDao{
 		{
 			System.out.println("An Error Occurred !");
 		}
+		return ("Student Added Successfully");
 	}
 	
 	@Override
-	public  ArrayList<String> showstudent(File F2) 
+	public  ArrayList<String> showStudent(File F2) 
 	{
 		ArrayList <String> St_data = new ArrayList<String>();
 		try {

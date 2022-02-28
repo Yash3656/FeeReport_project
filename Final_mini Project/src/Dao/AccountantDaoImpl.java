@@ -5,11 +5,11 @@ import java.util.Scanner;
 import java.awt.Desktop;
 import java.io.*;
 
-public class AccountantDaoImpl implements AccountantDao{
+public class AccountantDaoImpl implements AccountantDaoF{
 
 	Scanner sc = new Scanner(System.in);
 	
-	public boolean login_1(String acc_name,String acc_pass,File F1 )
+	public boolean login(String acc_name,String acc_pass,File F1 )
 	{
 		boolean flag = false;
 		try {

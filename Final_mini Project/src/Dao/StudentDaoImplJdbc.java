@@ -1,18 +1,13 @@
 package Dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.sql.*;
+import java.util.*;
 
-public class StudentDaoImpl_JDBC implements StudentDao_JDBC{
+public class StudentDaoImplJdbc implements StudentDaoJdbc{
 
 	
 	@Override
-	public String addstudent(Student S,Connection conn) {
+	public String addStudent(Student S,Connection conn) {
 		long flag=0;
 		String add = ("insert into student values('"
 				+S.getRollNo()+"','"+S.getName()+"','"+S.getFees()+"','"+S.getPaid_fees()+"','"+S.getDue_fees()+"','"
@@ -26,12 +21,13 @@ public class StudentDaoImpl_JDBC implements StudentDao_JDBC{
 				e.printStackTrace();
 			}
 			if(flag>0)
-				return ("Student Added Successfully");
+				return ("Student Added Su3"
+						+ "2.ccessfully");
 			else
 				return null;
 	}
 	@Override
-	public ArrayList<String> showstudent(Connection conn) {
+	public ArrayList<String> showStudent(Connection conn) {
 		String show = "select * from student";
 		ArrayList <String> l = new ArrayList<String>();
 		try {
@@ -57,8 +53,8 @@ public class StudentDaoImpl_JDBC implements StudentDao_JDBC{
 	}
 
 	@Override
-	public String load(int s,Connection conn) {
-		String a = "select * from student where roll_no="+s;
+	public String load(int roll_no,Connection conn) {
+		String a = "select * from student where roll_no="+roll_no;
 		String l="";
 		try {
 			Statement st1 = conn.createStatement();
@@ -109,6 +105,7 @@ public class StudentDaoImpl_JDBC implements StudentDao_JDBC{
 				System.out.println("Enter the New-Course ");
 				String new_course = sc.next();
 				PreparedStatement st2 = conn.prepareStatement("update student set course=? where roll_no=?");
+				st2.setString(1,new_course);
 				st2.setInt(2,rn1);
 				st2.executeUpdate();
 				flag=1;

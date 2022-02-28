@@ -4,11 +4,11 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 
-public class AccountantDaoImpl_JDBC implements AccountantDao_JDBC {
+public class AccountantDaoImplJdbc implements AccountantDaoJdbc {
 Scanner sc = new Scanner(System.in);
 	
 	@Override
-	public boolean login_1(String acc_name,String acc_pass,Connection conn)
+	public boolean login(String acc_name,String acc_pass,Connection conn)
 	{
 		boolean flag = false;
 		try {
