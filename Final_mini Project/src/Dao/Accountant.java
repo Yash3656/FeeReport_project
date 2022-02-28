@@ -5,6 +5,7 @@ public class Accountant {
 	private String  acc_password;
 	private String acc_email;
 	private String acc_contact;
+	private String acc_id;
 
 	public String getAcc_name() {
 		return acc_name;
@@ -36,6 +37,14 @@ public class Accountant {
 
 	public void setAcc_contact(String acc_contact) {
 		this.acc_contact = acc_contact;
+	}
+
+	public String getAcc_id() {
+		return acc_id;
+	}
+
+	public void setAcc_id(String acc_id) {
+		this.acc_id = acc_id;
 	}
 	
 

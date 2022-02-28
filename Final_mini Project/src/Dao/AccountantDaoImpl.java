@@ -75,4 +75,5 @@ public class AccountantDaoImpl implements AccountantDao{
 		}
 		return ("Accountant " + A.getAcc_name() +"Added Successfully");
 	}
+
 }

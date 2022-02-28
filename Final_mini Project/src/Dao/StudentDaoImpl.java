@@ -1,43 +1,31 @@
 package Dao;
 
-import java.awt.Desktop;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class StudentDaoImpl implements StudentDao{
-	List<Student> students;
 
-	   @SuppressWarnings("unused")
-	public StudentDaoImpl(){
-	      students = new ArrayList<Student>();
-	      Student S1 = new Student();
-	   }
-    @Override
-	public ArrayList<String>  due(Student S,File F2)
+	@Override
+	public void addstudent(Student S,File F2)
 	{
-    	ArrayList <String> St_due = new ArrayList<String>();
 		try {
-			FileReader fr = new FileReader(F2);
-			FileWriter fw = new FileWriter(F2,true);
-			BufferedReader br=new BufferedReader(fr);
-	        BufferedWriter bw=new BufferedWriter(fw);
-	        String s="";
-	        while((s=br.readLine())!=null)        
-	        {	if(s.indexOf("Due")!=-1)
-	    		{
-	    			St_due.add(s);
-	    		}
-	        }
-		} catch (IOException e) {
-			e.printStackTrace();
+			FileWriter Fw = new FileWriter(F2,true);
+			BufferedWriter Bw=new BufferedWriter(Fw);
+		
+		String f = (S.getRollNo()+"\t"+S.getName()+"\t"+S.getCourse()+"\t"+S.getEmail_Id()
+					+"\t"+S.getFees()+"\t"+S.getPaid_fees()+"\t"+S.getDue_fees()+"\t"+S.getAddress()
+					+"\t"+S.getCity()+"\t"+S.getState()+"\t"+S.getCountry()+"\t"+S.getCountry()+"\t"+S.getContact_No()+"\n");
+	
+			Bw.write(f);
+			Bw.close();
 		}
-		return St_due;
-		
-		
+		catch(IOException e)
+		{
+			System.out.println("An Error Occurred !");
+		}
 	}
-
+	
 	@Override
 	public  ArrayList<String> showstudent(File F2) 
 	{
@@ -58,6 +46,29 @@ public class StudentDaoImpl implements StudentDao{
 		}
         return (St_data);
 		
+	}
+	@Override
+	public String load(String s,File F2)
+	{
+		String str2="";
+		try {
+            FileReader fr = new FileReader(F2);
+            @SuppressWarnings("resource")
+			BufferedReader br=new BufferedReader(fr);
+            String str = "";
+            while((str=br.readLine())!=null)  
+            {  
+            	if(str.indexOf(s)!=-1)
+            	{
+            		str2=str;
+            	}
+            }
+		}
+            catch(Exception e) {
+            	System.out.println("Record not found");
+            }
+            	
+      return str2;
 	}
 
 	@Override
@@ -117,50 +128,29 @@ public class StudentDaoImpl implements StudentDao{
 		return ("The Student Data is Updated");
 		
 	}
-	
-	
-	@Override
-	public void addstudent(Student S,File F2)
+    @Override
+	public ArrayList<String>  due(Student S,File F2)
 	{
+    	ArrayList <String> St_due = new ArrayList<String>();
 		try {
-			FileWriter Fw = new FileWriter(F2,true);
-			BufferedWriter Bw=new BufferedWriter(Fw);
-		
-		String f = (S.getRollNo()+"\t"+S.getName()+"\t"+S.getCourse()+"\t"+S.getEmail_Id()
-					+"\t"+S.getFees()+"\t"+S.getPaid_fees()+"\t"+S.getDue_fees()+"\t"+S.getAddress()
-					+"\t"+S.getCity()+"\t"+S.getState()+"\t"+S.getCountry()+"\t"+S.getCountry()+"\t"+S.getContact_No()+"\n");
-	
-			Bw.write(f);
-			Bw.close();
-		}
-		catch(IOException e)
-		{
-			System.out.println("An Error Occurred !");
-		}
-	}
-	
-	@Override
-	public String load(String s,File F2)
-	{
-		String str2="";
-		try {
-            FileReader fr = new FileReader(F2);
-            @SuppressWarnings("resource")
+			FileReader fr = new FileReader(F2);
+			FileWriter fw = new FileWriter(F2,true);
 			BufferedReader br=new BufferedReader(fr);
-            String str = "";
-            while((str=br.readLine())!=null)  
-            {  
-            	if(str.indexOf(s)!=-1)
-            	{
-            		str2=str;
-            	}
-            }
+	        BufferedWriter bw=new BufferedWriter(fw);
+	        String s="";
+	        while((s=br.readLine())!=null)        
+	        {	if(s.indexOf("Due")!=-1)
+	    		{
+	    			St_due.add(s);
+	    		}
+	        }
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-            catch(Exception e) {
-            	System.out.println("Record not found");
-            }
-            	
-      return str2;
+		return St_due;
+		
+		
 	}
+	
 }
 
