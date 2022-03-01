@@ -4,7 +4,7 @@ import java.io.File;
 import java.sql.*;
 import java.util.*;
 
-public class StudentDaoImplJdbc implements StudentDaoF{
+public class StudentDaoImplJdbc implements StudentDao{
 
 	
 	@Override

@@ -4,11 +4,11 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 
-public class AccountantDaoImplJdbc implements AccountantDaoJdbc {
+public class AccountantDaoImplJdbc implements AccountantDao {
 Scanner sc = new Scanner(System.in);
 	
 	@Override
-	public boolean login(String acc_name,String acc_pass,Connection conn)
+	public boolean login(String acc_name,String acc_pass,File F1,Connection conn)
 	{
 		boolean flag = false;
 		try {
@@ -33,7 +33,7 @@ Scanner sc = new Scanner(System.in);
 		}
 }
 		@Override
-	public String addAccountant(Accountant A,Connection conn) {
+	public String addAccountant(Accountant A,File F1,Connection conn) {
 		String acc = ("insert into accountant values('"+A.getAcc_name()+"','"+A.getAcc_password()+
 					"','"+A.getAcc_email()+"','"+A.getAcc_contact()+"','"+A.getAcc_id()+"')");
 		int a=0;
@@ -51,7 +51,7 @@ Scanner sc = new Scanner(System.in);
 			return null;
 	}
 		@Override
-		public ArrayList<String> showAccountant(Connection conn)
+		public ArrayList<String> showAccountant(File F1,Connection conn)
 		{
 	        ArrayList <String> At_data = new ArrayList<String>(); 
 	        String acc_s = "Select * from Accountant";

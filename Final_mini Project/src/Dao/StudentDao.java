@@ -4,7 +4,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-public interface StudentDaoF {
+public interface StudentDao {
 	
 	public String updateStudent(Student S1,String b,int rn,File F2,Connection conn);
 	public String addStudent(Student S,File F2,Connection conn);

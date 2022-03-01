@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.Desktop;
 import java.io.*;
+import java.sql.Connection;
 
-public class AccountantDaoImpl implements AccountantDaoF{
+public class AccountantDaoImpl implements AccountantDao{
 
 	Scanner sc = new Scanner(System.in);
 	
-	public boolean login(String acc_name,String acc_pass,File F1 )
+	public boolean login(String acc_name,String acc_pass,File F1,Connection conn )
 	{
 		boolean flag = false;
 		try {
@@ -40,7 +41,7 @@ public class AccountantDaoImpl implements AccountantDaoF{
 		}
 }
 	@Override
-	public ArrayList<String> showAccountant(File F1)
+	public ArrayList<String> showAccountant(File F1,Connection conn)
 	{
 		 
         String str = "";
@@ -60,7 +61,7 @@ public class AccountantDaoImpl implements AccountantDaoF{
 		
 	}
 	@Override
-	public String addAccountant(Accountant A,File F1) {
+	public String addAccountant(Accountant A,File F1,Connection conn) {
 		try {
 			FileWriter Fw = new FileWriter(F1,true);
 			BufferedWriter Bw = new BufferedWriter(Fw);

@@ -12,7 +12,7 @@ public class Fee_report
 {
 	 static Scanner sc = new Scanner(System.in);
 	int a,z;
-	public void original(Admin Adm,Accountant Accnt,AccountantDaoF AccntF,AccountantDaoJdbc AccntD,Student Std,StudentDaoF StdF,StudentDaoF StdD,File F1,File F2, Connection conn) throws SQLException
+	public void original(Admin Adm,Accountant Accnt,AccountantDao AccntF,AccountantDao AccntD,Student Std,StudentDao StdF,StudentDao StdD,File F1,File F2, Connection conn) throws SQLException
 	{
 		do
 		{ 
@@ -49,11 +49,11 @@ public class Fee_report
 						Accnt.setAcc_email(sc.nextLine());
 						System.out.println("Enter the Contact-No of the Accountant:-- ");
 						Accnt.setAcc_contact(sc.nextLine());
-						AccntF.addAccountant(Accnt, F1);
+						AccntF.addAccountant(Accnt, F1,conn);
 						break;
 						
 					case 2:
-						ArrayList <String> l  = AccntF.showAccountant(F1);
+						ArrayList <String> l  = AccntF.showAccountant(F1,conn);
 						System.out.println(l);
 						
 						break;
@@ -71,12 +71,12 @@ public class Fee_report
 						Accnt.setAcc_contact(sc.nextLine());
 						System.out.println("Enter the Id of the Accountant:-- ");
 						Accnt.setAcc_id(sc.nextLine());
-						String z=AccntD.addAccountant(Accnt, conn);
+						String z=AccntD.addAccountant(Accnt,F1, conn);
 						System.out.println(z);
 						break;
 						
 					case 4:
-						ArrayList <String> l2  = AccntD.showAccountant(conn);
+						ArrayList <String> l2  = AccntD.showAccountant(F1,conn);
 						System.out.println(l2);
 						
 						break;	
@@ -109,7 +109,7 @@ public class Fee_report
 				String acc_name = sc.next();
 				System.out.println("Enter the Accountant Password :--");
 				String acc_pass = sc.next();
-				boolean y= AccntF.login(acc_name,acc_pass, F1);
+				boolean y= AccntF.login(acc_name,acc_pass, F1,conn);
 				if(y)
 				{
 					System.out.println("\n Accountant Login Successful!\n");
@@ -266,11 +266,11 @@ public class Fee_report
 		Fee_report Fee = new Fee_report();
 		Admin Adm = new Admin();
 		Accountant Accnt = new Accountant();
-		AccountantDaoF AccntF =  new AccountantDaoImpl();
-		AccountantDaoJdbc AccntD =  new AccountantDaoImplJdbc();
+		AccountantDao AccntF =  new AccountantDaoImpl();
+		AccountantDao AccntD =  new AccountantDaoImplJdbc();
 		Student Std = new Student();
-		StudentDaoF StdF = new StudentDaoImplF();
-		StudentDaoF StdD = new StudentDaoImplJdbc();
+		StudentDao StdF = new StudentDaoImplF();
+		StudentDao StdD = new StudentDaoImplJdbc();
 		Fee.original(Adm,Accnt,AccntF,AccntD,Std,StdF,StdD,F1,F2,conn);
 	}
 	

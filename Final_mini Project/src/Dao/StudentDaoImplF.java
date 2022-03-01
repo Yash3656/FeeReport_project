@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StudentDaoImplF implements StudentDaoF{
+public class StudentDaoImplF implements StudentDao{
 
 	@Override
 	public String addStudent(Student S,File F2,Connection conn)
