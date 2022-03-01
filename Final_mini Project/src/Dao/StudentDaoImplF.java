@@ -1,13 +1,14 @@
 package Dao;
 
 import java.io.*;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentDaoImplF implements StudentDaoF{
 
 	@Override
-	public String addStudent(Student S,File F2)
+	public String addStudent(Student S,File F2,Connection conn)
 	{
 		try {
 			FileWriter Fw = new FileWriter(F2,true);
@@ -28,7 +29,7 @@ public class StudentDaoImplF implements StudentDaoF{
 	}
 	
 	@Override
-	public  ArrayList<String> showStudent(File F2) 
+	public  ArrayList<String> showStudent(File F2,Connection conn) 
 	{
 		ArrayList <String> St_data = new ArrayList<String>();
 		try {
@@ -49,7 +50,7 @@ public class StudentDaoImplF implements StudentDaoF{
 		
 	}
 	@Override
-	public String load(String s,File F2)
+	public String load(int s,File F2,Connection conn)
 	{
 		String str2="";
 		try {
@@ -73,7 +74,7 @@ public class StudentDaoImplF implements StudentDaoF{
 	}
 
 	@Override
-	public String updateStudent(Student S,String b,File F2) {
+	public String updateStudent(Student S,String b,int rn,File F2,Connection conn) {
 		try{
 		FileReader fr = new FileReader(F2);
 		FileWriter Fw = new FileWriter(F2,true);
@@ -130,7 +131,7 @@ public class StudentDaoImplF implements StudentDaoF{
 		
 	}
     @Override
-	public ArrayList<String>  due(Student S,File F2)
+	public ArrayList<String>  due(Student S,File F2,Connection conn)
 	{
     	ArrayList <String> St_due = new ArrayList<String>();
 		try {

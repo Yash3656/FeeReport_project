@@ -12,7 +12,7 @@ public class Fee_report
 {
 	 static Scanner sc = new Scanner(System.in);
 	int a,z;
-	public void original(Admin Adm,Accountant Accnt,AccountantDaoF AccntF,AccountantDaoJdbc AccntD,Student Std,StudentDaoF StdF,StudentDaoJdbc StdD,File F1,File F2, Connection conn) throws SQLException
+	public void original(Admin Adm,Accountant Accnt,AccountantDaoF AccntF,AccountantDaoJdbc AccntD,Student Std,StudentDaoF StdF,StudentDaoF StdD,File F1,File F2, Connection conn) throws SQLException
 	{
 		do
 		{ 
@@ -149,26 +149,26 @@ public class Fee_report
 						Std.setCountry(sc.nextLine());
 						System.out.println("Enter the Contact-No of the Accountant:-- ");
 						Std.setContact_No(sc.nextLine());
-						String addF =StdF.addStudent(Std,F2);
+						String addF =StdF.addStudent(Std,F2,conn);
 						System.out.println(addF);
 						break;
 						
 					case 2:
-							ArrayList <String> l1  =StdF.showStudent(F2);
+							ArrayList <String> l1  =StdF.showStudent(F2,conn);
 							System.out.println(l1);
 						break;
 					
 					case 3:
 						System.out.println("Enter the roll number u want to load info for:--");
-						String rn =sc.nextLine();
-						String b =StdF.load(rn,F2);
+						int rn =sc.nextInt();
+						String b =StdF.load(rn,F2,conn);
 						System.out.println(b);
-						String a =StdF.updateStudent(Std,b,F2);
+						String a =StdF.updateStudent(Std,b,rn,F2,conn);
 						System.out.println(a);
 						break;
 						
 					case 4:
-						ArrayList <String> l2  =StdF.due(Std,F2);
+						ArrayList <String> l2  =StdF.due(Std,F2,conn);
 						System.out.println(l2);
 						break;
 						
@@ -197,26 +197,26 @@ public class Fee_report
 						Std.setCountry(sc.next());
 						System.out.println("Enter the Contact-No of the Accountant:-- ");
 						Std.setContact_No(sc.next());
-						String res =StdD.addStudent(Std,conn);
+						String res =StdD.addStudent(Std,F2,conn);
 						System.out.println(res);
 						break;
 						
 					case 6:
-							ArrayList <String> l4  =StdD.showStudent(conn);
+							ArrayList <String> l4  =StdD.showStudent(F2,conn);
 							System.out.println(l4);
 						break;
 					
 					case 7:
 						System.out.println("Enter the roll number u want to load info for:--");
 						int rn1 =sc.nextInt();
-						String b1 =StdD.load(rn1,conn);
+						String b1 =StdD.load(rn1,F2,conn);
 						System.out.println(b1);
-						String a1 =StdD.updateStudent(Std,rn1,conn);
+						String a1 =StdD.updateStudent(Std,b1,rn1,F2,conn);
 						System.out.println(a1);
 						break;
 						
 					case 8:
-						ArrayList <String> l3  =StdD.due(conn);
+						ArrayList <String> l3  =StdD.due(Std,F2,conn);
 						System.out.println(l3);
 						break;
 						
@@ -270,7 +270,7 @@ public class Fee_report
 		AccountantDaoJdbc AccntD =  new AccountantDaoImplJdbc();
 		Student Std = new Student();
 		StudentDaoF StdF = new StudentDaoImplF();
-		StudentDaoJdbc StdD = new StudentDaoImplJdbc();
+		StudentDaoF StdD = new StudentDaoImplJdbc();
 		Fee.original(Adm,Accnt,AccntF,AccntD,Std,StdF,StdD,F1,F2,conn);
 	}
 	

@@ -1,13 +1,14 @@
 package Dao;
 
+import java.io.File;
 import java.sql.*;
 import java.util.*;
 
-public class StudentDaoImplJdbc implements StudentDaoJdbc{
+public class StudentDaoImplJdbc implements StudentDaoF{
 
 	
 	@Override
-	public String addStudent(Student S,Connection conn) {
+	public String addStudent(Student S,File F2,Connection conn) {
 		long flag=0;
 		String add = ("insert into student values('"
 				+S.getRollNo()+"','"+S.getName()+"','"+S.getFees()+"','"+S.getPaid_fees()+"','"+S.getDue_fees()+"','"
@@ -27,7 +28,7 @@ public class StudentDaoImplJdbc implements StudentDaoJdbc{
 				return null;
 	}
 	@Override
-	public ArrayList<String> showStudent(Connection conn) {
+	public ArrayList<String> showStudent(File F2,Connection conn) {
 		String show = "select * from student";
 		ArrayList <String> l = new ArrayList<String>();
 		try {
@@ -53,7 +54,7 @@ public class StudentDaoImplJdbc implements StudentDaoJdbc{
 	}
 
 	@Override
-	public String load(int roll_no,Connection conn) {
+	public String load(int roll_no,File F2,Connection conn) {
 		String a = "select * from student where roll_no="+roll_no;
 		String l="";
 		try {
@@ -80,7 +81,7 @@ public class StudentDaoImplJdbc implements StudentDaoJdbc{
 
 	@SuppressWarnings("resource")
 	@Override
-	public String updateStudent(Student S1,int rn1,Connection conn) {
+	public String updateStudent(Student S1,String b,int rn1,File F2,Connection conn) {
 		Scanner sc = new Scanner(System.in);
 		int flag=0;
 		try {
@@ -219,7 +220,7 @@ public class StudentDaoImplJdbc implements StudentDaoJdbc{
 	}
 
 	@Override
-	public ArrayList<String> due(Connection conn) {
+	public ArrayList<String> due(Student S,File F2,Connection conn) {
 		String acc_d = "select * from student where due_fees !=0";
 		ArrayList <String> l = new ArrayList<String>();
 		try {
